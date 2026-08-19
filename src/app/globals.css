@@ -71,8 +71,9 @@
     0px 10px 4px 0px rgba(0, 0, 0, 0.005), 0px 6px 3px 0px rgba(0, 0, 0, 0.02),
     0px 3px 2px 0px rgba(0, 0, 0, 0.03), 0px 1px 2px 0px rgba(0, 0, 0, 0.03);
 
-  --font-sans: "Inter", -apple-system, "system-ui", "Segoe UI", Helvetica,
-    "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-sans: var(--font-inter), -apple-system, "system-ui", "Segoe UI",
+    Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji",
+    "Segoe UI Symbol";
 }
 
 @media (min-width: 1000px) {
@@ -193,7 +194,8 @@ canvas {
   box-shadow: var(--box-shadow-level-1);
   border: 1px solid transparent;
   white-space: nowrap;
-  transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 .btn:focus-visible {
   outline: none;
