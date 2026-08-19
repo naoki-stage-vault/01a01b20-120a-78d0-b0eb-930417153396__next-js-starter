@@ -1,0 +1,38 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+@media (min-width: 1000px) {
+  .header {
+    padding: 20px;
+  }
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 29px;
+  color: var(--color-mono-800);
+  user-select: none;
+}
+
+.logoText {
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  font-weight: var(--font-weight-bold);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
