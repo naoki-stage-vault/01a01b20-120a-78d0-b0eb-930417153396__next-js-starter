@@ -63,7 +63,7 @@ export async function POST(req: Request) {
       reply = parsed.reply;
       changes = validateChanges(parsed.changes);
     } else {
-      const demo = demoInterpret(userMsg, body.avatar);
+      const demo = demoInterpret(userMsg);
       reply = demo.reply;
       changes = validateChanges(demo.changes);
     }

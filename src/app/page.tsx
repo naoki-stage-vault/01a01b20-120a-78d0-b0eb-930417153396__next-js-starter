@@ -16,7 +16,7 @@ export default function Home() {
       setBusy(true);
       try {
         const history = messages
-          .filter((m) => m.role !== "welcome" && !m.error)
+          .filter((m) => m.id !== "welcome" && !m.error)
           .map((m) => ({ role: m.role, content: m.content }))
           .concat([{ role: "user" as const, content: text }]);
         const res = await fetch("/api/ai", {

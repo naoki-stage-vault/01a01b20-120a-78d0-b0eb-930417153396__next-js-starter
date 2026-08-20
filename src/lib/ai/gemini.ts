@@ -50,6 +50,29 @@ export interface InterpreterResponse {
   changes: AiEditChange[];
 }
 
+interface GeminiPart {
+  text?: string;
+  inlineData?: { mimeType: string; data: string };
+}
+interface GeminiResponse {
+  candidates?: { content?: { parts?: GeminiPart[] } }[];
+}
+
+function parseGeminiResponse(raw: string): GeminiResponse {
+  let json: unknown;
+  try {
+    json = JSON.parse(raw);
+  } catch {
+    throw new AiError("Malformed API response", 422);
+  }
+  return json as GeminiResponse;
+}
+
+function firstText(res: GeminiResponse): string {
+  const parts = res.candidates?.[0]?.content?.parts ?? [];
+  return parts.map((p) => p.text ?? "").join("");
+}
+
 export async function geminiInterpret(
   messages: { role: "user" | "assistant"; content: string }[],
   currentPartsJson: string,
@@ -98,19 +121,12 @@ export async function geminiInterpret(
   const raw = await res.text();
   if (!res.ok) throw new AiError(raw.slice(0, 300), res.status);
 
-  let json: unknown;
+  const out = firstText(parseGeminiResponse(raw));
   try {
-    json = JSON.parse(raw);
-  } catch {
-    throw new AiError("Malformed API response", 422);
-  }
-  const parts = (json as any)?.candidates?.[0]?.content?.parts;
-  const out = Array.isArray(parts) ? parts.map((p: any) => p.text ?? "").join("") : "";
-  try {
-    const parsed = JSON.parse(out);
+    const parsed = JSON.parse(out) as { reply?: unknown; changes?: unknown };
     return {
       reply: String(parsed.reply ?? ""),
-      changes: Array.isArray(parsed.changes) ? parsed.changes : [],
+      changes: Array.isArray(parsed.changes) ? (parsed.changes as AiEditChange[]) : [],
     };
   } catch {
     throw new AiError("Unexpected AI response", 422);
@@ -138,14 +154,9 @@ export async function geminiElement(
   const raw = await res.text();
   if (!res.ok) throw new AiError(raw.slice(0, 300), res.status);
 
-  let json: unknown;
-  try {
-    json = JSON.parse(raw);
-  } catch {
-    throw new AiError("Malformed API response", 422);
-  }
-  const parts = (json as any)?.candidates?.[0]?.content?.parts ?? [];
-  const img = parts.find((p: any) => p.inlineData?.data);
+  const parsed = parseGeminiResponse(raw);
+  const parts = parsed.candidates?.[0]?.content?.parts ?? [];
+  const img = parts.find((p) => p.inlineData?.data);
   if (!img?.inlineData) throw new AiError("No image returned", 422);
   const { mimeType, data } = img.inlineData;
   return { dataUrl: `data:${mimeType};base64,${data}` };

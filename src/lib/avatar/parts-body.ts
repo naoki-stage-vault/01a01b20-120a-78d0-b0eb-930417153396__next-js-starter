@@ -1,11 +1,6 @@
 /** Head, hair, body renderers (background, skin, hair, clothing, custom). */
-import {
-  BACKGROUND_COLORS,
-  CLOTHING_COLORS,
-  HAIR_COLORS,
-  SKIN_COLORS,
-} from "./palettes";
-import { HAIR_BACK, HAIR_FRONT, TORSO, el, resolve } from "./parts-data";
+import { BACKGROUND_COLORS } from "./palettes";
+import { HAIR_BACK, HAIR_FRONT, TORSO, el } from "./parts-data";
 import type { CustomLayer } from "./types";
 
 export function backgroundHtml(partId: string): string {
