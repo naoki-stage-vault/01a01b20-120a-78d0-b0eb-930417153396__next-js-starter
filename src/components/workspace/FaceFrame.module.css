@@ -1,0 +1,64 @@
+.frameWrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.frame {
+  width: 220px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-dark);
+  box-shadow: var(--box-shadow-level-2);
+  overflow: hidden;
+  padding: 13.5%;
+  transition:
+    width 0.25s ease-in-out,
+    transform 0.25s ease-in-out,
+    opacity 0.25s ease-in-out;
+  transform: translateY(-42px);
+}
+
+@media (min-width: 1000px) {
+  .frame {
+    width: 280px;
+  }
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.fading {
+  opacity: 0.45;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ring {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.ring::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--color-border-dark);
+  border-top-color: var(--color-mono-800);
+  animation: spin 0.6s linear infinite;
+}

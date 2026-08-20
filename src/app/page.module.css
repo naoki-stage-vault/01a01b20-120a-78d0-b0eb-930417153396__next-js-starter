@@ -1,0 +1,14 @@
+.main {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px 16px;
+  position: relative;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 960px;
+}

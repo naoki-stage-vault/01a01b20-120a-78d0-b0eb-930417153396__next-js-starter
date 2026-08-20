@@ -1,0 +1,221 @@
+.editor {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  min-height: 0;
+}
+
+.catNav {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  flex-shrink: 0;
+}
+
+.catTab {
+  appearance: none;
+  font-family: inherit;
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-mono-600);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  padding: 6px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.catTab:hover {
+  background: var(--color-hover);
+}
+
+.catTabActive {
+  background: var(--color-blue-light);
+  border-color: var(--color-blue);
+  color: var(--color-mono-800);
+}
+
+.catTabActive:hover {
+  background: var(--color-blue-light);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding-right: 4px;
+  min-height: 0;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(64px, 1fr));
+  gap: var(--spacing-sm);
+}
+
+.tile {
+  appearance: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  aspect-ratio: 1 / 1;
+  background: var(--color-cream-light);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  padding: 8px;
+  color: var(--color-mono-800);
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tile:hover {
+  background: var(--color-white);
+  box-shadow: var(--box-shadow-level-1);
+}
+
+.tile:active {
+  background: var(--color-active);
+}
+
+.tileActive {
+  background: var(--color-blue-light);
+  border-color: var(--color-blue);
+  border-width: 2px;
+  padding: 7px;
+}
+
+.tileActive:hover {
+  background: var(--color-blue-light);
+}
+
+.tileCanvas {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
+
+.tileLabel {
+  font-size: 11px;
+  line-height: 1;
+  color: var(--color-mono-600);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.tileActive .tileLabel {
+  color: var(--color-mono-800);
+}
+
+.aiTile {
+  border-style: dashed;
+  color: var(--color-mono-500);
+  gap: 8px;
+}
+
+.aiTile:hover {
+  color: var(--color-blue);
+  border-color: var(--color-blue);
+}
+
+.aiBusy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+}
+
+.ringSmall {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.ringSmall::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--color-border-dark);
+  border-top-color: var(--color-mono-800);
+  animation: spin 0.6s linear infinite;
+}
+
+.colorRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.aiSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--color-border-dark);
+  padding-top: 12px;
+}
+
+.aiRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.aiInput {
+  flex: 1;
+  min-width: 0;
+  height: var(--size-button-sm);
+  padding: 0 12px;
+  font-family: inherit;
+  font-size: var(--font-size-body-sm);
+  color: var(--color-mono-800);
+  background: var(--color-white);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--radius-md);
+}
+
+.aiInput:focus-visible {
+  outline: none;
+  box-shadow: var(--box-shadow-focus);
+}
+
+.aiInput::placeholder {
+  color: var(--color-mono-400);
+}
+
+.layerList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.layerItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 8px 6px 12px;
+  background: var(--color-cream-light);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+}
+
+.layerLabel {
+  font-size: var(--font-size-body-sm);
+  color: var(--color-mono-600);
+}
+
+.error {
+  font-size: var(--font-size-body-sm);
+  color: #8a2f2f;
+}
